@@ -61,104 +61,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DotFlipEventManager.cs" />
-    <Compile Include="Assets\Scripts\BallScript\BallCntScript.cs" />
-    <Compile Include="Assets\Scripts\BallScript\BallOut.cs" />
-    <Compile Include="Assets\Scripts\BallScript\BallStatus.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\CreatePrefabScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\DragAndDrop.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\Go10hourScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\Go2hourScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\Go5hourScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\Go7hourScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\GoDownScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\GoLeftScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\GoRightScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\GoUpScript.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\PrefabController.cs" />
-    <Compile Include="Assets\Scripts\BlockScript\robot.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\AdsManagerHelper.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\BallCntDisplayScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\ClickEvent.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\DestroyObstacle.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\DestroyScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\ExitConfirm.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\GamePlayStartTime.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\InGameManager.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\InitScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\LimitClockScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\linkScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\LogoScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\MobileSet.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\OutOfCamera.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\OutOfInGame.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\PosInfoObject.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\PosInfoScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\Quit.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\QuitScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\SingletonScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\StageClearScript.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\StageNumberDisplay.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\StartBtnClick.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\StartScripts.cs" />
-    <Compile Include="Assets\Scripts\EtcScript\TimeCheckScript.cs" />
-    <Compile Include="Assets\Scripts\MapScript\BoatBtn.cs" />
-    <Compile Include="Assets\Scripts\MapScript\BoatMoveNewVer.cs" />
-    <Compile Include="Assets\Scripts\MapScript\BoatScript.cs" />
-    <Compile Include="Assets\Scripts\MapScript\SeaScript.cs" />
-    <Compile Include="Assets\Scripts\MapScript\TimeMoveBtnScript.cs" />
-    <Compile Include="Assets\Scripts\MapScript\TimeMoveScript.cs" />
-    <Compile Include="Assets\Scripts\MapScript\WaterNatural.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Blink\BlinkScript.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Blink\BlinkSwitchScript.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Blink\JustBlink.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Cosmos\Bullet.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Cosmos\CosmosPrefabsManager.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Cosmos\ShootingObstacle.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\DongFlyScript.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\EnterResetFunction.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Kernel\CenterColliderKernel.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Kernel\NewVerKernel.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Kernel\SideColliderKernel.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Leaf\LeafGoDown.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Leaf\LeafGoLeft.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Leaf\LeafGoRight.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Leaf\LeafGoUp.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Move\MoveX.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Move\MoveY.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Move\SwitchMove.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\ObstacleBtn.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\ObstacleScript.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Spin\JustSpin.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Spin\SpinScript.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Spin\SpinSwitchScript.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\Stage04Script.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\StageClearManager.cs" />
-    <Compile Include="Assets\Scripts\ObstaclePattern\WebScript.cs" />
-    <Compile Include="Assets\Scripts\Rank\GameMenu.cs" />
-    <Compile Include="Assets\Scripts\Rank\InputText.cs" />
-    <Compile Include="Assets\Scripts\Rank\MyTest.cs" />
-    <Compile Include="Assets\Scripts\Rank\Panel.cs" />
-    <Compile Include="Assets\Scripts\Rank\Post.cs" />
-    <Compile Include="Assets\Scripts\Rank\RankScript.cs" />
-    <Compile Include="Assets\Scripts\Rank\text.cs" />
-    <Compile Include="Assets\Scripts\Rank\Tuple.cs" />
-    <Compile Include="Assets\Scripts\Rank\WWWHelper.cs" />
-    <Compile Include="Assets\Scripts\SaveScript\Load.cs" />
-    <Compile Include="Assets\Scripts\SaveScript\LoadScene.cs" />
-    <Compile Include="Assets\Scripts\SaveScript\SaveScene.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\NewVer\FingerBlink.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\NewVer\MoveDrag.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\NewVer\TutorialManager.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\NewVer\TutorialSkip.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\NewVer\WaveScript.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\TutorialBlockSet.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\TutorialClear.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\TutorialDropDong.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\TutorialPrefabMake.cs" />
-    <Compile Include="Assets\Scripts\Tutorial\TutorialScript.cs" />
-    <Compile Include="Assets\Scripts\updateMemo.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\BlockMove.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\Move.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\Switch.cs" />
+    <Compile Include="Assets\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\System\CameraSystem.cs" />
+    <Compile Include="Assets\Scripts\System\LoadSystem.cs" />
+    <Compile Include="Assets\Scripts\System\StateSystem.cs" />
+    <Compile Include="Assets\Scripts\System\UISystem.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -362,9 +272,6 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJson">
-      <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Assets/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/admin/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
