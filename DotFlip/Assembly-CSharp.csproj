@@ -61,12 +61,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ObstaclePattern\Blink.cs" />
     <Compile Include="Assets\Scripts\ObstaclePattern\BlockMove.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\Cosmos.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\CosmosMisaile.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\Kernel.cs" />
     <Compile Include="Assets\Scripts\ObstaclePattern\Move.cs" />
+    <Compile Include="Assets\Scripts\ObstaclePattern\Spin.cs" />
     <Compile Include="Assets\Scripts\ObstaclePattern\Switch.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\System\CameraSystem.cs" />
     <Compile Include="Assets\Scripts\System\LoadSystem.cs" />
+    <Compile Include="Assets\Scripts\System\MapDataAsset.cs" />
+    <Compile Include="Assets\Scripts\System\PosDebug_ForDev.cs" />
+    <Compile Include="Assets\Scripts\System\StageData.cs" />
+    <Compile Include="Assets\Scripts\System\StageSystem.cs" />
     <Compile Include="Assets\Scripts\System\StateSystem.cs" />
     <Compile Include="Assets\Scripts\System\UISystem.cs" />
     <Reference Include="UnityEditor.StandardEvents">

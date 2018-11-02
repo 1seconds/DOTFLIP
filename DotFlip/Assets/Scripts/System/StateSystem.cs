@@ -15,8 +15,10 @@ public enum Direct
     DOWN,
     RIGHT,
     LEFT,
-    UPRIGHT,
-    UPLEFT,
-    DOWNRIGHT,
-    DOWNLEFT
+}
+
+public enum ClockDirect
+{
+    CLOCKWISE,          //시계방향
+    ANTICLOCKWISE       //반시계방향
 }

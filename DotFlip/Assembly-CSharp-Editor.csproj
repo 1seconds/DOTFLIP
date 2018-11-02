@@ -61,29 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSDependencies.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSDocsUI.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSIOSSetupUI.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSPostBuild.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSProjectSettings.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSStrings.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSUpgrader.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\GPGSUtil.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\NearbyConnectionUI.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\PlistBuddyHelper.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Elements.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Lexer.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Objects.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Parser.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\PBXProject.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Sections.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Serializer.cs" />
-    <Compile Include="Assets\GooglePlayGames\Editor\xcode\Utils.cs" />
-    <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
-    <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
-    <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
-    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
+    <Compile Include="Assets\Editor\ScriptableObjectUtility.cs" />
+    <Compile Include="Assets\Editor\StageDataAsset.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -338,18 +317,6 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJson">
-      <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Assets/LitJson.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.IOSResolver">
-      <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Assets/PlayServicesResolver/Editor/Google.IOSResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.JarResolver">
-      <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Assets/PlayServicesResolver/Editor/Google.JarResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandler">
-      <HintPath>C:/Users/admin/Documents/DOTFLIP/DotFlip/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/admin/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
