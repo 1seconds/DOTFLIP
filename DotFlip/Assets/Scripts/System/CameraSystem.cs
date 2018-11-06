@@ -30,14 +30,14 @@ public class CameraSystem : MonoBehaviour
             camera_.transform.position = Vector3.Lerp(camera_.transform.position, verticalMovedPos, time_ / waitingTime);
             if (0.1f < time_ / waitingTime)
             {
-                for(int i =0; i < stageSystem.stage[stageSystem.currentStage - 1].stageInfo.Length; i++)
+                for(int i =0; i < stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo.Length; i++)
                 {
-                    if (stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].stageDirect.Equals(Direct.DOWN))
+                    if (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].stageDirect.Equals(Direct.DOWN))
                     {
-                        if(stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage < 10)
-                            SceneManager.LoadScene("0" + (stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage).ToString());
+                        if(stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage < 10)
+                            SceneManager.LoadScene("0" + (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage).ToString());
                         else
-                            SceneManager.LoadScene(stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage.ToString());
+                            SceneManager.LoadScene(stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage.ToString());
                     }
                         
                     else
@@ -49,19 +49,19 @@ public class CameraSystem : MonoBehaviour
 
         else if(player.transform.position.x > 9.5f)
         {
-            player.GetComponent<PlayerMove>().speed = 1.0f;
+            player.GetComponent<PlayerMove>().speed = 0.5f;
             time_ += Time.deltaTime;
             camera_.transform.position = Vector3.Lerp(camera_.transform.position, horizonMovedPos, time_ / waitingTime);
             if (0.1f < time_ / waitingTime)
             {
-                for (int i = 0; i < stageSystem.stage[stageSystem.currentStage - 1].stageInfo.Length; i++)
+                for (int i = 0; i < stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo.Length; i++)
                 {
-                    if (stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].stageDirect.Equals(Direct.RIGHT))
+                    if (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].stageDirect.Equals(Direct.RIGHT))
                     {
-                        if (stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage < 10)
-                            SceneManager.LoadScene("0" + (stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage).ToString());
+                        if (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage < 10)
+                            SceneManager.LoadScene("0" + (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage).ToString());
                         else
-                            SceneManager.LoadScene(stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage.ToString());
+                            SceneManager.LoadScene(stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage.ToString());
                     }
                     else
                         continue;

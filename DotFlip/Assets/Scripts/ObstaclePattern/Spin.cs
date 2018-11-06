@@ -21,9 +21,15 @@ public class Spin : MonoBehaviour
             switchScript = switchObj.GetComponent<Switch>();
             isSwitchNone = false;
         }
-
-
         StartCoroutine(Working(clockDirect));
+    }
+
+    private void Awake()
+    {
+        if (switchObj != null)
+        {
+            GameSystem.switchContainObjectsStack.Push(gameObject);
+        }
     }
 
     IEnumerator Working(ClockDirect currentDirect)

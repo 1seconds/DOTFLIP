@@ -10,62 +10,30 @@ public class UISystem : MonoBehaviour
     public GameObject settingBtn;
     public GameObject soundBtn;
     public GameObject hintBtn;
-    public Direct shootDirect;
+    public GameObject delBtn;
+    public GameObject saveBlockBtn;
 
     public Sprite[] btnSprSet;
-    private GameObject player;
     public Text messageText;
     private char[] messageCharArray;
 
     static public bool isTriggerEnter = false;
     private bool isSettingBtnOn = false;
-
-    private StageSystem stageSystem;
-    public Transform obstacleTrans;
-    private GameObject objPrefab;
+    static public bool isDelBtnOn = false;
+    static public bool isSaveBlockOn = true;
 
     public float waitingTime;
     private float time_;
 
-    private void MakeNextStage()
-    {
-        for(int i =0; i < stageSystem.stage[stageSystem.currentStage - 1].stageInfo.Length; i++)
-        {
-            if (stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].stageDirect.Equals(Direct.DOWN))
-            {
-                for (int j = 0; j < stageSystem.stage[stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage - 1].ObjectInfo.Length; j++)
-                {
-                    objPrefab = Instantiate(stageSystem.stage[stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage - 1].ObjectInfo[j].obj);
-                    objPrefab.transform.parent = obstacleTrans;
-                    objPrefab.transform.position = stageSystem.stage[stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage - 1].ObjectInfo[j].pos;
-                    objPrefab.transform.position += new Vector3(0, -11.65f, 0);
-                }
-            }
-            else if(stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].stageDirect.Equals(Direct.RIGHT))
-            {
-                for (int j = 0; j < stageSystem.stage[stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage - 1].ObjectInfo.Length; j++)
-                {
-                    objPrefab = Instantiate(stageSystem.stage[stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage - 1].ObjectInfo[j].obj);
-                    objPrefab.transform.parent = obstacleTrans;
-                    objPrefab.transform.position = stageSystem.stage[stageSystem.stage[stageSystem.currentStage - 1].stageInfo[i].nextStage - 1].ObjectInfo[j].pos;
-                    objPrefab.transform.position += new Vector3(20.68f, 0, 0);
-                }
-            }
-            
-                
-        }
 
-        
-    }
 
     private void Start()
     {
         //init
-        player = GameObject.FindWithTag("Player");
-        stageSystem = gameObject.GetComponent<StageSystem>();
-        MakeNextStage();
-        messageText.transform.position = stageSystem.stage[stageSystem.currentStage - 1].messageInfo.pos;
+        messageText.transform.position = gameObject.GetComponent<StageSystem>().stage[gameObject.GetComponent<StageSystem>().currentStage - 1].messageInfo.pos;
         messageText.text = "";
+        SaveBlockOn();
+        DelBtnOff();
     }
 
     private IEnumerator CanvasMoveCor(GameObject canvas, Vector3 pos)
@@ -107,9 +75,8 @@ public class UISystem : MonoBehaviour
     //비활성화 - 게임시작
     public void DownSideCanvasOff()
     {
-        player.GetComponent<PlayerMove>().currentDirect = shootDirect;
+        gameObject.GetComponent<GameSystem>().GameStart();
 
-        MessageManager(stageSystem.stage[stageSystem.currentStage - 1].messageInfo.ment , stageSystem.stage[stageSystem.currentStage - 1].messageInfo.messageDisplayTime);
         StartCoroutine(CanvasMoveCor(downSideCanvas, new Vector3(0, -130, 0)));
         if (isSettingBtnOn)
             StartCoroutine(CanvasMoveCor(soundBtn, hintBtn, new Vector3(576, -295, 0), new Vector3(576, -295, 0)));
@@ -148,11 +115,49 @@ public class UISystem : MonoBehaviour
 
     private IEnumerator MessageManagerCor(string message, float time)
     {
+        messageText.text = "";
         messageCharArray = message.ToCharArray();
         for (int i = 0; i < messageCharArray.Length; i++)
         {
             messageText.text += messageCharArray[i];
             yield return new WaitForSeconds(time / messageCharArray.Length);
         }
+    }
+
+    private void DelBtnOn()
+    {
+        isDelBtnOn = true;
+        delBtn.GetComponent<Image>().sprite = btnSprSet[1];
+    }
+    private void DelBtnOff()
+    {
+        isDelBtnOn = false;
+        delBtn.GetComponent<Image>().sprite = btnSprSet[0];
+    }
+    public void DelBtnActive()
+    {
+        if (isDelBtnOn)
+            DelBtnOff();
+        else
+            DelBtnOn();
+    }
+
+    private void SaveBlockOn()
+    {
+        isSaveBlockOn = true;
+        saveBlockBtn.GetComponent<Image>().sprite = btnSprSet[2];
+    }
+    private void SaveBlockOff()
+    {
+        isSaveBlockOn = false;
+        saveBlockBtn.GetComponent<Image>().sprite = btnSprSet[3];
+    }
+
+    public void SaveBlockActive()
+    {
+        if (isSaveBlockOn)
+            SaveBlockOff();
+        else
+            SaveBlockOn();
     }
 }

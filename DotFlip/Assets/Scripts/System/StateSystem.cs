@@ -22,3 +22,16 @@ public enum ClockDirect
     CLOCKWISE,          //시계방향
     ANTICLOCKWISE       //반시계방향
 }
+
+public enum UISet
+{
+    UIBLOCK,
+    SETBLOCK
+}
+
+public enum Block
+{
+    NORMAL,
+    SLOW,
+    BOOSTER
+}

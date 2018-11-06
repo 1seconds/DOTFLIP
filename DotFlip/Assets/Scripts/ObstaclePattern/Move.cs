@@ -18,7 +18,7 @@ public class Move : MonoBehaviour
     {
         if (switchObj == null)
             isSwitchNone = true;
-
+        
         else
         {
             switchScript = switchObj.GetComponent<Switch>();
@@ -27,6 +27,14 @@ public class Move : MonoBehaviour
 
 
         StartCoroutine(Working(direct));
+    }
+
+    private void Awake()
+    {
+        if (switchObj != null)
+        {
+            GameSystem.switchContainObjectsStack.Push(gameObject);
+        }
     }
 
     IEnumerator Working(Direct currentDirect)

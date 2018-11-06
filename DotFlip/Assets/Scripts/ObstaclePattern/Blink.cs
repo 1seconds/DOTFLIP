@@ -10,7 +10,7 @@ public class Blink : MonoBehaviour
     private Switch switchScript;            //스위치 스크립트
     private bool isSwitchNone;              //스위치가 있는지 여부 판단
 
-    public float speed;                     //오브젝트 속도
+    public float waitingTime;               //이미지가 바뀔때까지의 시간
 
     private void Start()
     {
@@ -22,28 +22,81 @@ public class Blink : MonoBehaviour
             switchScript = switchObj.GetComponent<Switch>();
             isSwitchNone = false;
         }
-
-
         StartCoroutine(Working());
     }
 
-    IEnumerator Working()
+    private void Awake()
     {
+        if (switchObj != null)
+        {
+            GameSystem.switchContainObjectsStack.Push(gameObject);
+        }
+    }
 
+    private IEnumerator Working()
+    {
         while (true)
         {
             //스위치가있으면
             if (!isSwitchNone)
             {
+                if(isUpStart)
+                {
+                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[2];
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                else
+                {
+                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[0];
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
                 if (!switchScript.switchOn)
                     break;
             }
             else
             {
-                for(int i=0; i< 3;i++)
+                if(isUpStart)
+                {
+                    for (int i = 2; i > -1; i--)
+                    {
+                        if(i != 2)
+                            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        else
+                            gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+                        gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[i];
+                        yield return new WaitForSeconds(waitingTime);
+                    }
+                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[1];
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    yield return new WaitForSeconds(waitingTime);
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (i != 2)
+                            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        else
+                            gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+                        gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[i];
+                        yield return new WaitForSeconds(waitingTime);
+                    }
+                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[1];
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    yield return new WaitForSeconds(waitingTime);
+                }
+                
                 break;
             }
             yield return new WaitForEndOfFrame();
+        }
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            if (switchScript.switchOn)
+                break;
         }
         StartCoroutine(Working());
     }

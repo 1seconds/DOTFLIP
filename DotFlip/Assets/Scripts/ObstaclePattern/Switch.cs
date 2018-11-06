@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    [HideInInspector] public bool switchOn = false;
+    public bool switchOn = false;
 
     private void OnTriggerEnter2D(Collider2D obj)
     {
