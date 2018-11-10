@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +11,41 @@ public class GameSystem : MonoBehaviour
 
     private GameObject player;
     public GameObject[] blocks;
+    public GameObject[] obstacleBlocks;
+    public GameObject[] diamond;
 
     static public Stack<GameObject> switchContainObjectsStack = new Stack<GameObject>();           //스위치가 있는 오브젝트들
     private Vector2[] switchContainObjectPos;               //스위치가 있는 오브젝트의 위치값
     private GameObject[] switchContainObject;
 
+    public static int rowCnt = 6;
+    public static int colCnt = 13;
+
+    static public bool[,,] tileObjectState = new bool[5, colCnt, rowCnt];
+
+    static public void TileObject(CameraView view, int row, int col, bool isAble)
+    {
+        //Debug.Log(row + " : "+col);
+        if (row - 1 < 0 || col - 1 < 0)
+            return;
+        else
+            tileObjectState[(int)view, row - 1, col - 1] = isAble;
+    }
+
+    private void Awake()
+    {
+        for(int k =0; k < 5;k++)
+        {
+            for (int i = 0; i < colCnt; i++)
+            {
+                for (int j = 0; j < rowCnt; j++)
+                {
+                    tileObjectState[k, i, j] = true;
+                }
+            }
+        }
+        
+    }
     private void SaveSwitchContainObjectPos()
     {
         switchContainObject = new GameObject[switchContainObjectsStack.Count];
@@ -39,24 +69,35 @@ public class GameSystem : MonoBehaviour
     }
 
     //게임 시작
-    public void GameStart()
+    public void GameStart(Direct direct)
     {
         currentGameState = GameState.DISPLAYING;
         uiSystem.MessageManager(stageSystem.stage[stageSystem.currentStage - 1].messageInfo.ment, stageSystem.stage[stageSystem.currentStage - 1].messageInfo.messageDisplayTime);
-        player.GetComponent<PlayerMove>().currentDirect = stageSystem.stage[stageSystem.currentStage - 1].playerInfo.shootDirect;
+        player.GetComponent<PlayerMove>().currentDirect = direct;
         blocks = GameObject.FindGameObjectsWithTag("Block");
     }
 
     //라이프를 1개 소진
     public void GameMiss()
     {
-        player.transform.position = stageSystem.stage[stageSystem.currentStage - 1].playerInfo.pos;
+        player.transform.position = stageSystem.playerInitPos;
         player.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
         currentGameState = GameState.READY;
         uiSystem.DownSideCanvasOn();
+        gameObject.GetComponent<CameraSystem>().camera_.transform.position = new Vector3(0, 0, -10);
+        gameObject.GetComponent<CameraSystem>().currentCameraView = CameraView.CENTER;
+        
+        for (int i = 0; i < obstacleBlocks.Length; i++)
+        {
+            obstacleBlocks[i].GetComponent<SpriteRenderer>().color = new Color(obstacleBlocks[i].GetComponent<SpriteRenderer>().color.r, obstacleBlocks[i].GetComponent<SpriteRenderer>().color.g, obstacleBlocks[i].GetComponent<SpriteRenderer>().color.b, 1);
+            obstacleBlocks[i].GetComponent<BoxCollider2D>().enabled = true;
+        }
+            
+        for (int i = 0; i < diamond.Length; i++)
+            diamond[i].SetActive(true);
 
         //Init
-        for(int i =0; i< switchContainObjectPos.Length; i++)
+        for (int i =0; i< switchContainObjectPos.Length; i++)
         {
             switchContainObject[i].transform.eulerAngles = new Vector3(0, 0, 0);
             switchContainObject[i].transform.position = switchContainObjectPos[i];
@@ -71,7 +112,10 @@ public class GameSystem : MonoBehaviour
         if (UISystem.isSaveBlockOn)
         {
             for (int i = 0; i < blocks.Length; i++)
-                blocks[i].SetActive(true);
+            {
+                blocks[i].GetComponent<SpriteRenderer>().color = new Color(blocks[i].GetComponent<SpriteRenderer>().color.r, blocks[i].GetComponent<SpriteRenderer>().color.g, blocks[i].GetComponent<SpriteRenderer>().color.b, 1);
+                blocks[i].GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
         else
             return;

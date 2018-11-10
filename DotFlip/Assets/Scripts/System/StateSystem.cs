@@ -35,3 +35,13 @@ public enum Block
     SLOW,
     BOOSTER
 }
+
+public enum CameraView
+{
+    CENTER,
+    UPSIDE,
+    DOWNSIDE,
+    RIGHTSIDE,
+    LEFTSIDE
+}
+

@@ -46,10 +46,11 @@ public class Spin : MonoBehaviour
             switch (currentDirect)
             {
                 case ClockDirect.ANTICLOCKWISE:
-                    gameObject.transform.eulerAngles += new Vector3(0, 0, -speed * Time.deltaTime);
+                    gameObject.transform.eulerAngles += new Vector3(0, 0, speed * Time.deltaTime);
+                    
                     break;
                 case ClockDirect.CLOCKWISE:
-                    gameObject.transform.eulerAngles += new Vector3(0, 0, speed * Time.deltaTime);
+                    gameObject.transform.eulerAngles += new Vector3(0, 0, -speed * Time.deltaTime);
                     break;
             }
 

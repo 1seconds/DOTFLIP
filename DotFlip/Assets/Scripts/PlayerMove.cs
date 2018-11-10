@@ -10,6 +10,12 @@ public class PlayerMove : MonoBehaviour
     private float time_;
     private IEnumerator speedUpCor;
     private IEnumerator speedDownCor;
+    private GameSystem gameSystem;
+
+    private void Start()
+    {
+        gameSystem = GameObject.FindWithTag("GameManager").GetComponent<GameSystem>();
+    }
 
     public void SpeedDown()
     {
@@ -21,7 +27,8 @@ public class PlayerMove : MonoBehaviour
             
         else
         {
-            StopCoroutine(speedUpCor);
+            if (speedUpCor != null)
+                StopCoroutine(speedUpCor);
             speedDownCor = SpeedControl(5, 2.5f);
             StartCoroutine(speedDownCor);
         }
@@ -36,7 +43,8 @@ public class PlayerMove : MonoBehaviour
             
         else
         {
-            StopCoroutine(speedDownCor);
+            if(speedDownCor != null)
+                StopCoroutine(speedDownCor);
             speedUpCor = SpeedControl(5, 10);
             StartCoroutine(speedUpCor);
         }
@@ -46,11 +54,11 @@ public class PlayerMove : MonoBehaviour
     {
         time_ = 0;
         isEnterTrigger = true;
-        speed = speedAdapt;
+        
         while(true)
         {
+            speed = speedAdapt;
             time_ += Time.deltaTime;
-
             if (time_ > 1f)
                 break;
             yield return new WaitForEndOfFrame();
@@ -62,7 +70,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        switch(currentDirect)
+        if (gameSystem.currentGameState.Equals(GameState.READY))
+            return;
+        switch (currentDirect)
         {
             case Direct.HOLD:
                 break;

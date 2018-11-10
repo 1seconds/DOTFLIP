@@ -19,7 +19,7 @@ public class Kernel : MonoBehaviour
     {
         if (enterKernel == null)
         {
-            if (obj.CompareTag("Player"))
+            if (obj.CompareTag("Player") || obj.CompareTag("Auto"))
             {
                 enterKernel = gameObject;
                 KernelOn(obj.gameObject);
@@ -35,7 +35,7 @@ public class Kernel : MonoBehaviour
             return;
         else
         {
-            if (obj.CompareTag("Player"))
+            if (obj.CompareTag("Player") || obj.CompareTag("Auto"))
             {
                 enterKernel = null;
             }

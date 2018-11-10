@@ -35,68 +35,60 @@ public class Blink : MonoBehaviour
 
     private IEnumerator Working()
     {
-        while (true)
+        //스위치가있으면
+        if (!isSwitchNone)
         {
-            //스위치가있으면
-            if (!isSwitchNone)
+
+            if (isUpStart)
             {
-                if(isUpStart)
-                {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[2];
-                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                }
-                else
-                {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[0];
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                }
-                if (!switchScript.switchOn)
-                    break;
+                gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[2];
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
             else
             {
-                if(isUpStart)
-                {
-                    for (int i = 2; i > -1; i--)
-                    {
-                        if(i != 2)
-                            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                        else
-                            gameObject.GetComponent<BoxCollider2D>().enabled = true;
-
-                        gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[i];
-                        yield return new WaitForSeconds(waitingTime);
-                    }
-                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[1];
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    yield return new WaitForSeconds(waitingTime);
-                }
-                else
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (i != 2)
-                            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                        else
-                            gameObject.GetComponent<BoxCollider2D>().enabled = true;
-
-                        gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[i];
-                        yield return new WaitForSeconds(waitingTime);
-                    }
-                    gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[1];
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    yield return new WaitForSeconds(waitingTime);
-                }
-                
-                break;
+                gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[0];
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
             }
-            yield return new WaitForEndOfFrame();
+
+            while (true)
+            {
+                yield return new WaitForEndOfFrame();
+                if (switchScript.switchOn)
+                    break;
+            }
         }
-        while (true)
+
+        if (isUpStart)
         {
-            yield return new WaitForEndOfFrame();
-            if (switchScript.switchOn)
-                break;
+            for (int i = 2; i > -1; i--)
+            {
+                if (i != 2)
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                else
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+                gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[i];
+                yield return new WaitForSeconds(waitingTime);
+            }
+            gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[1];
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            yield return new WaitForSeconds(waitingTime);
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (i != 2)
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                else
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+                gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[i];
+                yield return new WaitForSeconds(waitingTime);
+            }
+            gameObject.GetComponent<SpriteRenderer>().sprite = digdaImg[1];
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            yield return new WaitForSeconds(waitingTime);
         }
         StartCoroutine(Working());
     }

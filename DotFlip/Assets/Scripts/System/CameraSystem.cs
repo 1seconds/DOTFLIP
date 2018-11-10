@@ -7,66 +7,44 @@ public class CameraSystem : MonoBehaviour
 {
     public GameObject player;
     public GameObject camera_;
+    public CameraView currentCameraView;
+    
 
-    public Vector3 horizonMovedPos;
-    public Vector3 verticalMovedPos;
+    private Vector3 rightMovedPos = new Vector3(20.6f, 0, -10);
+    private Vector3 downMovedPos = new Vector3(0, -11.7f, -10);
+    private Vector3 leftMovedPos = new Vector3(-20.6f, 0, -10);
+    private Vector3 upMovedPos = new Vector3(0, 11.7f, -10);
 
     private float time_ = 0;
-    public float waitingTime;
 
     private StageSystem stageSystem;
 
     public void Start()
     {
         stageSystem = gameObject.GetComponent<StageSystem>();
+        currentCameraView = CameraView.CENTER;
     }
 
     private void Update()
     {
-        if(player.transform.position.y < - 5f)
+        if ((player.transform.localPosition.y < -5f && player.transform.localPosition.y > -6.5f) && player.GetComponent<PlayerMove>().currentDirect.Equals(Direct.DOWN))
         {
+            currentCameraView = CameraView.DOWNSIDE;
             player.GetComponent<PlayerMove>().speed = 1.0f;
             time_ += Time.deltaTime;
-            camera_.transform.position = Vector3.Lerp(camera_.transform.position, verticalMovedPos, time_ / waitingTime);
-            if (0.1f < time_ / waitingTime)
-            {
-                for(int i =0; i < stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo.Length; i++)
-                {
-                    if (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].stageDirect.Equals(Direct.DOWN))
-                    {
-                        if(stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage < 10)
-                            SceneManager.LoadScene("0" + (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage).ToString());
-                        else
-                            SceneManager.LoadScene(stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage.ToString());
-                    }
-                        
-                    else
-                        continue;
-                }
-            }
-
+            camera_.transform.position = Vector3.Lerp(camera_.transform.position, downMovedPos, time_);
         }
-
-        else if(player.transform.position.x > 9.5f)
+        else if ((player.transform.localPosition.y < -5f && player.transform.localPosition.y > -6.5f) && player.GetComponent<PlayerMove>().currentDirect.Equals(Direct.UP))
         {
-            player.GetComponent<PlayerMove>().speed = 0.5f;
+            currentCameraView = CameraView.CENTER;
+            player.GetComponent<PlayerMove>().speed = 1.0f;
             time_ += Time.deltaTime;
-            camera_.transform.position = Vector3.Lerp(camera_.transform.position, horizonMovedPos, time_ / waitingTime);
-            if (0.1f < time_ / waitingTime)
-            {
-                for (int i = 0; i < stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo.Length; i++)
-                {
-                    if (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].stageDirect.Equals(Direct.RIGHT))
-                    {
-                        if (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage < 10)
-                            SceneManager.LoadScene("0" + (stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage).ToString());
-                        else
-                            SceneManager.LoadScene(stageSystem.stage[stageSystem.currentStage - 1].nextStageInfo[i].nextStage.ToString());
-                    }
-                    else
-                        continue;
-                }
-            }
+            camera_.transform.position = Vector3.Lerp(camera_.transform.position, new Vector3(0, 0, -10), time_);
+        }
+        else
+        {
+            time_ = 0;
+            player.GetComponent<PlayerMove>().speed = 5.0f;
         }
     }
 }

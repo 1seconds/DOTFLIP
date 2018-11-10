@@ -8,7 +8,7 @@ public class Switch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.tag.Equals("Player"))
+        if (obj.tag.Equals("Player") || obj.CompareTag("Auto"))
         {
             if (switchOn)
                 switchOn = false;

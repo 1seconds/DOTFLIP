@@ -13,6 +13,7 @@ public class UISystem : MonoBehaviour
     public GameObject delBtn;
     public GameObject saveBlockBtn;
 
+    //public GameObject shootDirectSet;
     public Sprite[] btnSprSet;
     public Text messageText;
     private char[] messageCharArray;
@@ -25,7 +26,8 @@ public class UISystem : MonoBehaviour
     public float waitingTime;
     private float time_;
 
-
+    private IEnumerator coroutine;
+    private IEnumerator coroutine_;
 
     private void Start()
     {
@@ -73,19 +75,50 @@ public class UISystem : MonoBehaviour
     }
 
     //비활성화 - 게임시작
-    public void DownSideCanvasOff()
-    {
-        gameObject.GetComponent<GameSystem>().GameStart();
+    public void DownSideCanvasOff(int direct)
+    {        
+        gameObject.GetComponent<GameSystem>().obstacleBlocks = GameObject.FindGameObjectsWithTag("ObstacleBlock");
 
-        StartCoroutine(CanvasMoveCor(downSideCanvas, new Vector3(0, -130, 0)));
+        switch (direct)
+        {
+            case 1:
+                gameObject.GetComponent<GameSystem>().GameStart(Direct.UP); 
+                break;
+            case 2:
+                gameObject.GetComponent<GameSystem>().GameStart(Direct.DOWN);
+                break;
+            case 3:
+                gameObject.GetComponent<GameSystem>().GameStart(Direct.RIGHT);
+                break;
+            case 4:
+                gameObject.GetComponent<GameSystem>().GameStart(Direct.LEFT);
+                break;
+        }
+
+        //shootDirectSet.SetActive(false);
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+        coroutine = CanvasMoveCor(downSideCanvas, new Vector3(0, -130, 0));
+        StartCoroutine(coroutine);
+
         if (isSettingBtnOn)
-            StartCoroutine(CanvasMoveCor(soundBtn, hintBtn, new Vector3(576, -295, 0), new Vector3(576, -295, 0)));
+        {
+            if(coroutine != null)
+                StopCoroutine(coroutine);
+            coroutine = CanvasMoveCor(soundBtn, hintBtn, new Vector3(576, -295, 0), new Vector3(576, -295, 0));
+            StartCoroutine(coroutine);
+        }
+            
     }
 
     //활성화
     public void DownSideCanvasOn()
     {
-        StartCoroutine(CanvasMoveCor(downSideCanvas, Vector3.zero));
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+
+        coroutine = CanvasMoveCor(downSideCanvas, Vector3.zero);
+        StartCoroutine(coroutine);
     }
 
     public void SettingCanvasActive()
@@ -96,7 +129,11 @@ public class UISystem : MonoBehaviour
         //비활성화
         if (isSettingBtnOn)
         {
-            StartCoroutine(CanvasMoveCor(soundBtn, hintBtn, new Vector3(576, -295, 0), new Vector3(576, -295, 0)));
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+            coroutine = CanvasMoveCor(soundBtn, hintBtn, new Vector3(576, -295, 0), new Vector3(576, -295, 0));
+            StartCoroutine(coroutine);
+
             isSettingBtnOn = false;
         }
 
@@ -110,13 +147,17 @@ public class UISystem : MonoBehaviour
 
     public void MessageManager(string message, float time)
     {
-        StartCoroutine(MessageManagerCor(message, time));
+        if (coroutine_ != null)
+            StopCoroutine(coroutine_);
+        coroutine_ = MessageManagerCor(message, time);
+        StartCoroutine(coroutine_);
     }
 
     private IEnumerator MessageManagerCor(string message, float time)
     {
         messageText.text = "";
         messageCharArray = message.ToCharArray();
+
         for (int i = 0; i < messageCharArray.Length; i++)
         {
             messageText.text += messageCharArray[i];

@@ -7,11 +7,18 @@ public class BlockMove : MonoBehaviour
     public Direct direct;
     public Block currentBlock;
 
+    private Vector3 tmpVector;
+    private float restX;    //나머지
+    private float restY;
+    private int modX;       //몫
+    private int modY;
+    private CameraSystem cameraSystem;
+
     private void OnTriggerEnter2D(Collider2D obj)
     {
         if (obj.CompareTag("Player"))
         {
-            switch(currentBlock)
+            switch (currentBlock)
             {
                 case Block.SLOW:
                     obj.GetComponent<PlayerMove>().SpeedDown();
@@ -20,9 +27,52 @@ public class BlockMove : MonoBehaviour
                     obj.GetComponent<PlayerMove>().SpeedUp();
                     break;
             }
-            obj.transform.position = gameObject.transform.position;
-            obj.GetComponent<PlayerMove>().currentDirect = direct;
-            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D obj)
+    {
+        if (obj.CompareTag("Player"))
+        {
+            switch(obj.GetComponent<PlayerMove>().currentDirect)
+            {
+                case Direct.DOWN:
+                    if(obj.transform.position.y < gameObject.transform.position.y)
+                    {
+                        obj.transform.position = gameObject.transform.position;
+                        obj.GetComponent<PlayerMove>().currentDirect = direct;
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                    break;
+                case Direct.UP:
+                    if (obj.transform.position.y > gameObject.transform.position.y)
+                    {
+                        obj.transform.position = gameObject.transform.position;
+                        obj.GetComponent<PlayerMove>().currentDirect = direct;
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                    break;
+                case Direct.RIGHT:
+                    if (obj.transform.position.x > gameObject.transform.position.x)
+                    {
+                        obj.transform.position = gameObject.transform.position;
+                        obj.GetComponent<PlayerMove>().currentDirect = direct;
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                    break;
+                case Direct.LEFT:
+                    if (obj.transform.position.x < gameObject.transform.position.x)
+                    {
+                        obj.transform.position = gameObject.transform.position;
+                        obj.GetComponent<PlayerMove>().currentDirect = direct;
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                    break;
+            }
         }
     }
 
@@ -31,6 +81,10 @@ public class BlockMove : MonoBehaviour
         if (!UISystem.isDelBtnOn)
             return;
         else
+        {
+            gameObject.GetComponent<BlockDestroy>().isDestroyClick = true;
             gameObject.GetComponent<BlockDestroy>().enabled = true;
+        }
+
     }
 }
