@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UISystem : MonoBehaviour
 {
@@ -32,7 +33,6 @@ public class UISystem : MonoBehaviour
     private void Start()
     {
         //init
-        messageText.transform.position = gameObject.GetComponent<StageSystem>().stage[gameObject.GetComponent<StageSystem>().currentStage - 1].messageInfo.pos;
         messageText.text = "";
         SaveBlockOn();
         DelBtnOff();
@@ -200,5 +200,10 @@ public class UISystem : MonoBehaviour
             SaveBlockOff();
         else
             SaveBlockOn();
+    }
+
+    public void BackActive()
+    {
+        SceneManager.LoadScene("00");
     }
 }

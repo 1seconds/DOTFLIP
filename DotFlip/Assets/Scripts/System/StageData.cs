@@ -13,7 +13,6 @@ using System;
 public class MessageInfo
 {
     public string ment;                 //나오는 멘트
-    public Vector3 pos;                 //멘트가나오는 위치
     public float messageDisplayTime;    //메세지가 몇초에 걸쳐서 나올것인지 ..
 }
 

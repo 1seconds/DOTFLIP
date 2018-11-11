@@ -15,5 +15,7 @@ public class LoadSystem : MonoBehaviour
             stage += input.text;
         else
             stage = input.text;
+
+        SceneManager.LoadScene(stage);
     }
 }
