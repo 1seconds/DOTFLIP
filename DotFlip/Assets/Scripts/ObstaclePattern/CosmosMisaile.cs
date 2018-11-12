@@ -5,7 +5,7 @@ using UnityEngine;
 public class CosmosMisaile : MonoBehaviour
 {
     private float speed = 2.5f;
-    private float time_ = 2.0f;
+    private float time_ = 1.0f;
     private float currentTime = 0;
 
     private void Update()
