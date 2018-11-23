@@ -14,7 +14,7 @@ public class BlockMove : MonoBehaviour
     private int modY;
     private CameraSystem cameraSystem;
 
-    private void OnTriggerEnter2D(Collider2D obj)
+    private void OnTriggerEnter(Collider obj)
     {
         if (obj.CompareTag("Player"))
         {
@@ -30,7 +30,7 @@ public class BlockMove : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D obj)
+    private void OnTriggerStay(Collider obj)
     {
         if (obj.CompareTag("Player"))
         {
@@ -42,7 +42,7 @@ public class BlockMove : MonoBehaviour
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
                         gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
-                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
                 case Direct.UP:
@@ -51,7 +51,7 @@ public class BlockMove : MonoBehaviour
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
                         gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
-                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
                 case Direct.RIGHT:
@@ -60,7 +60,7 @@ public class BlockMove : MonoBehaviour
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
                         gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
-                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
                 case Direct.LEFT:
@@ -69,7 +69,7 @@ public class BlockMove : MonoBehaviour
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
                         gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
-                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
             }
@@ -85,6 +85,5 @@ public class BlockMove : MonoBehaviour
             gameObject.GetComponent<BlockDestroy>().isDestroyClick = true;
             gameObject.GetComponent<BlockDestroy>().enabled = true;
         }
-
     }
 }

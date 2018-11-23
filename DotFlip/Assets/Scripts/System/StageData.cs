@@ -12,7 +12,9 @@ using System;
 [Serializable]
 public class MessageInfo
 {
-    public string ment;                 //나오는 멘트
+    public string preMent;              //게임 시작 전 나오는 멘트
+    public string ment;                 //게임 중 나오는 멘트
+    public string failMent;             //실패시 나오는 멘트
     public float messageDisplayTime;    //메세지가 몇초에 걸쳐서 나올것인지 ..
 }
 

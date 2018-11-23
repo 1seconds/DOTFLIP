@@ -66,6 +66,7 @@ public class GameSystem : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 
         SaveSwitchContainObjectPos();
+        uiSystem.MessageManager(stageSystem.stage[stageSystem.currentStage - 1].messageInfo.preMent, 0);
     }
 
     //게임 시작
@@ -86,11 +87,12 @@ public class GameSystem : MonoBehaviour
         uiSystem.DownSideCanvasOn();
         gameObject.GetComponent<CameraSystem>().camera_.transform.position = new Vector3(0, 0, -10);
         gameObject.GetComponent<CameraSystem>().currentCameraView = CameraView.CENTER;
-        
+
+        uiSystem.MessageManager(stageSystem.stage[stageSystem.currentStage - 1].messageInfo.failMent, 0);
         for (int i = 0; i < obstacleBlocks.Length; i++)
         {
             obstacleBlocks[i].GetComponent<SpriteRenderer>().color = new Color(obstacleBlocks[i].GetComponent<SpriteRenderer>().color.r, obstacleBlocks[i].GetComponent<SpriteRenderer>().color.g, obstacleBlocks[i].GetComponent<SpriteRenderer>().color.b, 1);
-            obstacleBlocks[i].GetComponent<BoxCollider2D>().enabled = true;
+            obstacleBlocks[i].GetComponent<BoxCollider>().enabled = true;
         }
             
         for (int i = 0; i < diamond.Length; i++)
@@ -114,7 +116,7 @@ public class GameSystem : MonoBehaviour
             for (int i = 0; i < blocks.Length; i++)
             {
                 blocks[i].GetComponent<SpriteRenderer>().color = new Color(blocks[i].GetComponent<SpriteRenderer>().color.r, blocks[i].GetComponent<SpriteRenderer>().color.g, blocks[i].GetComponent<SpriteRenderer>().color.b, 1);
-                blocks[i].GetComponent<BoxCollider2D>().enabled = true;
+                blocks[i].GetComponent<BoxCollider>().enabled = true;
             }
         }
         else
