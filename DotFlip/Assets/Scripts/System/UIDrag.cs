@@ -132,6 +132,7 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
                     GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY, false);
             }
         }
+        blockPrefab.transform.position += new Vector3(0, 0, 3.7f);
     }
 
     public void OnMouseDown()
@@ -232,6 +233,7 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
                     GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY, false);
             }
         }
+        gameObject.transform.position += new Vector3(0, 0, 3.7f);
     }
 
     public void OnMouseDrag()

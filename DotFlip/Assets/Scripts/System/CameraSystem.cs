@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CameraSystem : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public GameObject camera_;
     public CameraView currentCameraView;
     
@@ -23,6 +23,7 @@ public class CameraSystem : MonoBehaviour
     {
         stageSystem = gameObject.GetComponent<StageSystem>();
         currentCameraView = CameraView.CENTER;
+        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
