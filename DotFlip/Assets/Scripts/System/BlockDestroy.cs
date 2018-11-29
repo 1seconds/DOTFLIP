@@ -24,8 +24,8 @@ public class BlockDestroy : MonoBehaviour
     private void Start()
     {
         cameraSystem = GameObject.FindWithTag("GameManager").GetComponent<CameraSystem>();
-        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2((randomValue(25, 75) - 50) * 0.1f, (randomValue(0, 25)) * 0.1f) * power);
+        //gameObject.GetComponent<Rigidbody>()
+        gameObject.GetComponent<Rigidbody>().AddForce(new Vector2((randomValue(25, 75) - 50) * 0.1f, (randomValue(0, 25)) * 0.1f) * power);
         Destroy(gameObject.GetComponent<UIDrag>());
 
         if (isDestroyClick)

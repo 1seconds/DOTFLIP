@@ -1,10 +1,12 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameSystem : MonoBehaviour
 {
     public GameState currentGameState;
+    public Transform lightSet;
 
     private UISystem uiSystem;
     private StageSystem stageSystem;
@@ -30,6 +32,8 @@ public class GameSystem : MonoBehaviour
         else
             tileObjectState[(int)view, row - 1, col - 1] = isAble;
     }
+
+
 
     private void Awake()
     {
@@ -80,6 +84,22 @@ public class GameSystem : MonoBehaviour
     //라이프를 1개 소진
     public void GameMiss()
     {
+        StartCoroutine(GameMissCor());
+    }
+
+    //라이프를 모두 다 사용했을 때
+    public void GameEnd()
+    {
+    }
+
+    IEnumerator GameMissCor()
+    {
+        for (int i = 0; i < lightSet.childCount; i++)
+            lightSet.GetChild(i).GetComponent<LightManager>().CoroutineStop();
+        yield return new WaitForSeconds(0.8f);
+        SoundManager.instance_.SFXPlay(SoundManager.instance_.sfxClips[0], 0.5f);
+        yield return new WaitForSeconds(0.4f);
+
         player.transform.position = stageSystem.playerInitPos;
         player.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
         currentGameState = GameState.READY;
@@ -93,16 +113,16 @@ public class GameSystem : MonoBehaviour
             obstacleBlocks[i].GetComponent<SpriteRenderer>().color = new Color(obstacleBlocks[i].GetComponent<SpriteRenderer>().color.r, obstacleBlocks[i].GetComponent<SpriteRenderer>().color.g, obstacleBlocks[i].GetComponent<SpriteRenderer>().color.b, 1);
             obstacleBlocks[i].GetComponent<BoxCollider>().enabled = true;
         }
-            
+
         for (int i = 0; i < diamond.Length; i++)
             diamond[i].SetActive(true);
 
         //Init
-        for (int i =0; i< switchContainObjectPos.Length; i++)
+        for (int i = 0; i < switchContainObjectPos.Length; i++)
         {
             switchContainObject[i].transform.eulerAngles = new Vector3(0, 0, 0);
             switchContainObject[i].transform.position = switchContainObjectPos[i];
-            if(switchContainObject[i].GetComponent<Move>() != null)
+            if (switchContainObject[i].GetComponent<Move>() != null)
                 switchContainObject[i].GetComponent<Move>().switchObj.GetComponent<Switch>().switchOn = false;
             else if (switchContainObject[i].GetComponent<Spin>() != null)
                 switchContainObject[i].GetComponent<Spin>().switchObj.GetComponent<Switch>().switchOn = false;
@@ -118,14 +138,6 @@ public class GameSystem : MonoBehaviour
                 blocks[i].GetComponent<BoxCollider>().enabled = true;
             }
         }
-        else
-            return;
     }
 
-    //라이프를 모두 다 사용했을 때
-    public void GameEnd()
-    {
-
-    }
-   
 }

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GoalManager : MonoBehaviour
 {
     public int nextStage;
-    private void OnTriggerStay2D(Collider2D obj)
+    private void OnTriggerStay(Collider obj)
     {
         if (obj.CompareTag("Player"))
         {
