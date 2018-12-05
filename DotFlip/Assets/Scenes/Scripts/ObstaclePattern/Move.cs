@@ -100,7 +100,6 @@ public class Move : MonoBehaviour
             if (switchScript.switchOn)
                 break;
         }
-
         StartCoroutine(Working(currentDirect));
     }
 }

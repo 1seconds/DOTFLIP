@@ -5,7 +5,8 @@ using UnityEngine;
 public enum GameState
 {
     READY,
-    DISPLAYING
+    DISPLAYING,
+    FAIL
 }
 
 public enum Direct

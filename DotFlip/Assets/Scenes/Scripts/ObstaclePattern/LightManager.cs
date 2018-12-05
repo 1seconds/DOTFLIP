@@ -15,7 +15,6 @@ public class LightManager : MonoBehaviour
     private Vector3 initPos;
     private Vector3 startPos;
     private GameObject player;
-    public bool isBGLight = false;
 
     public void CoroutineStop()
     {
@@ -30,10 +29,7 @@ public class LightManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         startPos = gameObject.transform.position;
 
-        if (isBGLight)
-        {
-            lightCor = StartCoroutine(Moving(0));
-        }
+        lightCor = StartCoroutine(Moving(0));
     }
 
     IEnumerator Moving(int index)

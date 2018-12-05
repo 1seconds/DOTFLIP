@@ -17,7 +17,8 @@ public class GameSystem : MonoBehaviour
     public GameObject[] diamond;
 
     static public Stack<GameObject> switchContainObjectsStack = new Stack<GameObject>();           //스위치가 있는 오브젝트들
-    private Vector2[] switchContainObjectPos;               //스위치가 있는 오브젝트의 위치값
+    private Vector3[] switchContainObjectPos;               //스위치가 있는 오브젝트의 위치값
+    private Vector3[] switchContainObjectEulerAngle;               //스위치가 있는 오브젝트의 각도값
     private GameObject[] switchContainObject;
 
     public static int rowCnt = 6;
@@ -52,13 +53,14 @@ public class GameSystem : MonoBehaviour
     private void SaveSwitchContainObjectPos()
     {
         switchContainObject = new GameObject[switchContainObjectsStack.Count];
-        switchContainObjectPos = new Vector2[switchContainObjectsStack.Count];
-
+        switchContainObjectPos = new Vector3[switchContainObjectsStack.Count];
+        switchContainObjectEulerAngle = new Vector3[switchContainObjectsStack.Count];
         //초기 위치 저장
         for (int i =0; i< switchContainObject.Length; i++)
         {
             switchContainObject[i] = switchContainObjectsStack.Pop();
-            switchContainObjectPos[i] = switchContainObject[i].transform.position;
+            switchContainObjectPos[i] = switchContainObject[i].transform.localPosition;
+            switchContainObjectEulerAngle[i] = switchContainObject[i].transform.localEulerAngles;
         }
     }
 
@@ -94,6 +96,8 @@ public class GameSystem : MonoBehaviour
 
     IEnumerator GameMissCor()
     {
+        currentGameState = GameState.FAIL;
+
         for (int i = 0; i < lightSet.childCount; i++)
             lightSet.GetChild(i).GetComponent<LightManager>().CoroutineStop();
         yield return new WaitForSeconds(0.8f);
@@ -120,14 +124,25 @@ public class GameSystem : MonoBehaviour
         //Init
         for (int i = 0; i < switchContainObjectPos.Length; i++)
         {
-            switchContainObject[i].transform.eulerAngles = new Vector3(0, 0, 0);
-            switchContainObject[i].transform.position = switchContainObjectPos[i];
+            switchContainObject[i].transform.localEulerAngles = switchContainObjectEulerAngle[i];
+            switchContainObject[i].transform.localPosition = switchContainObjectPos[i];
+
             if (switchContainObject[i].GetComponent<Move>() != null)
+            {
                 switchContainObject[i].GetComponent<Move>().switchObj.GetComponent<Switch>().switchOn = false;
+            }
+
             else if (switchContainObject[i].GetComponent<Spin>() != null)
+            {
                 switchContainObject[i].GetComponent<Spin>().switchObj.GetComponent<Switch>().switchOn = false;
+                switchContainObject[i].GetComponent<Spin>().StopCor();
+            }
+
             else if (switchContainObject[i].GetComponent<Blink>() != null)
+            {
                 switchContainObject[i].GetComponent<Blink>().switchObj.GetComponent<Switch>().switchOn = false;
+            }
+
         }
 
         if (UISystem.isSaveBlockOn)

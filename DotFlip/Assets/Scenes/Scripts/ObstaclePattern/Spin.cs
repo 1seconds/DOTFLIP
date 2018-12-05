@@ -11,6 +11,10 @@ public class Spin : MonoBehaviour
     public float speed;                     //오브젝트 속도
     public ClockDirect clockDirect;
 
+    public GameObject electronic;
+    private float time_;
+    Coroutine myCor;
+
     private void Start()
     {
         if (switchObj == null)
@@ -61,9 +65,33 @@ public class Spin : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
             if (switchScript.switchOn)
+            {
+                if (myCor != null)
+                    StopCoroutine(myCor);
+                myCor = StartCoroutine(ElectronicStart());
+                break;
+            }
+        }
+        StartCoroutine(Working(currentDirect));
+    }
+
+    public void StopCor()
+    {
+        StopCoroutine(myCor);
+        electronic.transform.localPosition = switchObj.transform.position;
+    }
+
+    IEnumerator ElectronicStart()
+    {
+        time_ = 0;
+        while (true)
+        {
+            electronic.transform.position = Vector3.Lerp(switchObj.transform.position, gameObject.transform.position, time_);
+            time_ += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            if (time_ > 1.0f)
                 break;
         }
-
-        StartCoroutine(Working(currentDirect));
+        myCor = StartCoroutine(ElectronicStart());
     }
 }
