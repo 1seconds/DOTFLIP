@@ -54,7 +54,7 @@ public class Move : MonoBehaviour
                 case Direct.HOLD:
                     break;
                 case Direct.DOWN:
-                    if (minValue > gameObject.transform.position.y)
+                    if (minValue > gameObject.transform.localPosition.y)
                     {
                         direct = Direct.UP;
                         currentDirect = Direct.UP;
@@ -63,7 +63,7 @@ public class Move : MonoBehaviour
                         gameObject.transform.Translate(Vector2.down * speed * Time.deltaTime);
                     break;
                 case Direct.UP:
-                    if (maxValue < gameObject.transform.position.y)
+                    if (maxValue < gameObject.transform.localPosition.y)
                     {
                         direct = Direct.DOWN;
                         currentDirect = Direct.DOWN;
@@ -72,7 +72,7 @@ public class Move : MonoBehaviour
                         gameObject.transform.Translate(Vector2.up * speed * Time.deltaTime);
                     break;
                 case Direct.LEFT:
-                    if (minValue > gameObject.transform.position.x)
+                    if (minValue > gameObject.transform.localPosition.x)
                     {
                         direct = Direct.RIGHT;
                         currentDirect = Direct.RIGHT;
@@ -81,7 +81,7 @@ public class Move : MonoBehaviour
                         gameObject.transform.Translate(Vector2.left * speed * Time.deltaTime);
                     break;
                 case Direct.RIGHT:
-                    if (maxValue < gameObject.transform.position.x)
+                    if (maxValue < gameObject.transform.localPosition.x)
                     {
                         direct = Direct.LEFT;
                         currentDirect = Direct.LEFT;

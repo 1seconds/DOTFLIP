@@ -6,61 +6,26 @@ public class GarbPlayer : MonoBehaviour
 {
     private bool isGrabOn = false;
 
-    private void OnTriggerExit2D(Collider2D obj)
+    private void OnTriggerExit(Collider obj)
     {
         if(obj.CompareTag("Player"))
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = true;
             isGrabOn = false;
+            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 
-    private void OnTriggerStay2D(Collider2D obj)
+    private void OnTriggerStay(Collider obj)
     {
         if (obj.CompareTag("Player") && !isGrabOn)
         {
-            switch (obj.GetComponent<PlayerMove>().currentDirect)
+            if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < 0.5f)
             {
-                case Direct.DOWN:
-                    if (obj.transform.position.y < gameObject.transform.position.y)
-                    {
-                        obj.transform.position = gameObject.transform.position;
-                        obj.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
-                        GameObject.FindWithTag("GameManager").GetComponent<UISystem>().DownSideCanvasOn();
-                        GameObject.FindWithTag("GameManager").GetComponent<GameSystem>().currentGameState = GameState.READY;
-                        isGrabOn = true;
-                    }
-                    break;
-                case Direct.UP:
-                    if (obj.transform.position.y > gameObject.transform.position.y)
-                    {
-                        obj.transform.position = gameObject.transform.position;
-                        obj.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
-                        GameObject.FindWithTag("GameManager").GetComponent<UISystem>().DownSideCanvasOn();
-                        GameObject.FindWithTag("GameManager").GetComponent<GameSystem>().currentGameState = GameState.READY;
-                        isGrabOn = true;
-                    }
-                    break;
-                case Direct.RIGHT:
-                    if (obj.transform.position.x > gameObject.transform.position.x)
-                    {
-                        obj.transform.position = gameObject.transform.position;
-                        obj.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
-                        GameObject.FindWithTag("GameManager").GetComponent<UISystem>().DownSideCanvasOn();
-                        GameObject.FindWithTag("GameManager").GetComponent<GameSystem>().currentGameState = GameState.READY;
-                        isGrabOn = true;
-                    }
-                    break;
-                case Direct.LEFT:
-                    if (obj.transform.position.x < gameObject.transform.position.x)
-                    {
-                        obj.transform.position = gameObject.transform.position;
-                        obj.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
-                        GameObject.FindWithTag("GameManager").GetComponent<UISystem>().DownSideCanvasOn();
-                        GameObject.FindWithTag("GameManager").GetComponent<GameSystem>().currentGameState = GameState.READY;
-                        isGrabOn = true;
-                    }
-                    break;
+                obj.transform.position = gameObject.transform.position + new Vector3(-0.15f, 0, 0);
+                obj.GetComponent<PlayerMove>().currentDirect = Direct.HOLD;
+                GameObject.FindWithTag("GameManager").GetComponent<UISystem>().DownSideCanvasOn();
+                GameObject.FindWithTag("GameManager").GetComponent<GameSystem>().currentGameState = GameState.READY;
+                isGrabOn = true;
             }
         }
     }

@@ -21,7 +21,6 @@ public class StartingPointSet : MonoBehaviour
         //아래방향
         if(modY < 0)
         {
-            Debug.Log(gameObject.name + " : " + modX + " " + modY);
             if (restX < 40)
             {
                 if (restY < 40)

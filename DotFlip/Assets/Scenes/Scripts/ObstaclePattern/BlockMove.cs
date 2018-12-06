@@ -41,7 +41,7 @@ public class BlockMove : MonoBehaviour
                     {
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
-                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0.2f);
                         gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
@@ -50,7 +50,7 @@ public class BlockMove : MonoBehaviour
                     {
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
-                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0.2f);
                         gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
@@ -59,7 +59,7 @@ public class BlockMove : MonoBehaviour
                     {
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
-                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0.2f);
                         gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;
@@ -68,7 +68,7 @@ public class BlockMove : MonoBehaviour
                     {
                         obj.transform.position = gameObject.transform.position;
                         obj.GetComponent<PlayerMove>().currentDirect = direct;
-                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0);
+                        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 0.2f);
                         gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     break;

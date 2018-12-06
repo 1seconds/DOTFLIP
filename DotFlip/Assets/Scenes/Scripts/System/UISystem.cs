@@ -34,8 +34,10 @@ public class UISystem : MonoBehaviour
     {
         //init
         messageText.text = "";
-        SaveBlockOn();
-        DelBtnOff();
+        if(saveBlockBtn != null)
+            SaveBlockOn();
+        if(delBtn != null)
+            DelBtnOff();
     }
 
     private IEnumerator CanvasMoveCor(GameObject canvas, Vector3 pos)

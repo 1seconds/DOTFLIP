@@ -15,7 +15,7 @@ public class Kernel : MonoBehaviour
         obj.transform.position = kernel.transform.position;
     }
 
-    private void OnTriggerEnter2D(Collider2D obj)
+    private void OnTriggerEnter(Collider obj)
     {
         if (enterKernel == null)
         {
@@ -29,7 +29,7 @@ public class Kernel : MonoBehaviour
             return;
     }
 
-    private void OnTriggerExit2D(Collider2D obj)
+    private void OnTriggerExit(Collider obj)
     {
         if (enterKernel == gameObject)
             return;
