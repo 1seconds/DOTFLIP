@@ -130,6 +130,7 @@ public class GameSystem : MonoBehaviour
             if (switchContainObject[i].GetComponent<Move>() != null)
             {
                 switchContainObject[i].GetComponent<Move>().switchObj.GetComponent<Switch>().switchOn = false;
+                switchContainObject[i].GetComponent<Move>().switchObj.GetComponent<Switch>().StopCor();
             }
 
             else if (switchContainObject[i].GetComponent<Spin>() != null)
@@ -141,6 +142,7 @@ public class GameSystem : MonoBehaviour
             else if (switchContainObject[i].GetComponent<Blink>() != null)
             {
                 switchContainObject[i].GetComponent<Blink>().switchObj.GetComponent<Switch>().switchOn = false;
+                switchContainObject[i].GetComponent<Blink>().switchObj.GetComponent<Switch>().StopCor();
             }
 
         }
