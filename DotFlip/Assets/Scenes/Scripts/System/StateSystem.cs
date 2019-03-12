@@ -33,8 +33,7 @@ public enum UISet
 public enum Block
 {
     NORMAL,
-    SLOW,
-    BOOSTER
+    INFINITY
 }
 
 public enum CameraView

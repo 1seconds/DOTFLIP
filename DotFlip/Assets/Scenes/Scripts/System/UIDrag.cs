@@ -173,21 +173,21 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         }
 
         isPaintOn = true;
-        if (ItemSystem.paintPrefab.name.Contains("Slow"))
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(0,255,255, 0.5f);
-            gameObject.GetComponent<BlockMove>().currentBlock = Block.SLOW;
-            ItemSystem.CancelItem();
-            return;
-        }
+        //if (ItemSystem.paintPrefab.name.Contains("Slow"))
+        //{
+        //    gameObject.GetComponent<SpriteRenderer>().color = new Color(0,255,255, 0.5f);
+        //    gameObject.GetComponent<BlockMove>().currentBlock = Block.SLOW;
+        //    ItemSystem.CancelItem();
+        //    return;
+        //}
 
-        else if(ItemSystem.paintPrefab.name.Contains("Booster"))
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red + new Color(0, 0, 0, -0.5f);
-            gameObject.GetComponent<BlockMove>().currentBlock = Block.BOOSTER;
-            ItemSystem.CancelItem();
-            return;
-        }
+        //else if(ItemSystem.paintPrefab.name.Contains("Booster"))
+        //{
+        //    gameObject.GetComponent<SpriteRenderer>().color = Color.red + new Color(0, 0, 0, -0.5f);
+        //    gameObject.GetComponent<BlockMove>().currentBlock = Block.BOOSTER;
+        //    ItemSystem.CancelItem();
+        //    return;
+        //}
     }
 
     public void OnMouseUp()
@@ -197,7 +197,6 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             isPaintOn = false;
             return;
         }
-
 
         if (restX < 40)
         {

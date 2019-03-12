@@ -16,18 +16,18 @@ public class BlockMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider obj)
     {
-        if (obj.CompareTag("Player"))
-        {
-            switch (currentBlock)
-            {
-                case Block.SLOW:
-                    obj.GetComponent<PlayerMove>().SpeedDown();
-                    break;
-                case Block.BOOSTER:
-                    obj.GetComponent<PlayerMove>().SpeedUp();
-                    break;
-            }
-        }
+        //if (obj.CompareTag("Player"))
+        //{
+        //    switch (currentBlock)
+        //    {
+        //        case Block.SLOW:
+        //            obj.GetComponent<PlayerMove>().SpeedDown();
+        //            break;
+        //        case Block.BOOSTER:
+        //            obj.GetComponent<PlayerMove>().SpeedUp();
+        //            break;
+        //    }
+        //}
     }
 
     private void OnTriggerStay(Collider obj)
