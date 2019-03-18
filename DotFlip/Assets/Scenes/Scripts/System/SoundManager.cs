@@ -34,4 +34,5 @@ public class SoundManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         bgmSource.volume = 0.3f;
     }
+
 }

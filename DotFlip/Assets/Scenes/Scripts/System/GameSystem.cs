@@ -81,6 +81,8 @@ public class GameSystem : MonoBehaviour
         uiSystem.MessageManager(stageSystem.stage[stageSystem.currentStage - 1].messageInfo.ment, stageSystem.stage[stageSystem.currentStage - 1].messageInfo.messageDisplayTime);
         player.GetComponent<PlayerMove>().currentDirect = direct;
         blocks = GameObject.FindGameObjectsWithTag("Block");
+        SoundManager.instance_.bgmSource.clip = SoundManager.instance_.bgmClips[0];
+        SoundManager.instance_.bgmSource.Play();
     }
 
     //라이프를 1개 소진
