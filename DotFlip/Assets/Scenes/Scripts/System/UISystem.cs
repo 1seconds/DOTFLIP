@@ -14,6 +14,8 @@ public class UISystem : MonoBehaviour
     public GameObject delBtn;
     public GameObject saveBlockBtn;
 
+    public GameObject[] blockCanvasSet = new GameObject[10];
+
     //public GameObject shootDirectSet;
     public Sprite[] btnSprSet;
     public Text messageText;
@@ -27,6 +29,8 @@ public class UISystem : MonoBehaviour
     public float waitingTime;
     private float time_;
 
+    private Transform blockCanvasTrans;
+
     private IEnumerator coroutine;
     private IEnumerator coroutine_;
 
@@ -34,7 +38,8 @@ public class UISystem : MonoBehaviour
     {
         //init
         messageText.text = "";
-        if(saveBlockBtn != null)
+        blockCanvasTrans = downSideCanvas.transform.GetChild(5).transform.GetChild(0).transform;
+        if (saveBlockBtn != null)
             SaveBlockOn();
         if(delBtn != null)
             DelBtnOff();

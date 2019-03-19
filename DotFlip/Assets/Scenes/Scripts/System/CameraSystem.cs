@@ -6,9 +6,7 @@ using UnityEngine.SceneManagement;
 public class CameraSystem : MonoBehaviour
 {
     private GameObject player;
-    public GameObject camera_;
-    public CameraView currentCameraView;
-    
+    public GameObject camera_;   
 
     private Vector3 rightMovedPos = new Vector3(20.6f, 0, -10);
     private Vector3 downMovedPos = new Vector3(0, -11.7f, -10);
@@ -22,25 +20,16 @@ public class CameraSystem : MonoBehaviour
     public void Start()
     {
         stageSystem = gameObject.GetComponent<StageSystem>();
-        currentCameraView = CameraView.CENTER;
         player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
     {
-        if ((player.transform.localPosition.y < -5f && player.transform.localPosition.y > -6.5f) && player.GetComponent<PlayerMove>().currentDirect.Equals(Direct.DOWN))
+        if ((player.transform.localPosition.y < -5f && player.transform.localPosition.y > -6.5f))
         {
-            currentCameraView = CameraView.DOWNSIDE;
             player.GetComponent<PlayerMove>().speed = 1.0f;
             time_ += Time.deltaTime;
             camera_.transform.position = Vector3.Lerp(camera_.transform.position, downMovedPos, time_);
-        }
-        else if ((player.transform.localPosition.y < -5f && player.transform.localPosition.y > -6.5f) && player.GetComponent<PlayerMove>().currentDirect.Equals(Direct.UP))
-        {
-            currentCameraView = CameraView.CENTER;
-            player.GetComponent<PlayerMove>().speed = 1.0f;
-            time_ += Time.deltaTime;
-            camera_.transform.position = Vector3.Lerp(camera_.transform.position, new Vector3(0, 0, -10), time_);
         }
         else
         {

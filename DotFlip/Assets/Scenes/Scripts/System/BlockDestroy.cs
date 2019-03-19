@@ -43,23 +43,23 @@ public class BlockDestroy : MonoBehaviour
             {
                 if (restY < 40)
                 {
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY - 1, true);
+                    GameSystem.TileObject(modX - 1, modY - 1, true);
                 }
                 else if (restY >= 40)
                 {
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY, true);
+                    GameSystem.TileObject(modX - 1, modY, true);
                 }
             }
             else if (restX >= 40)
             {
                 if (restY < 40)
                 {
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY - 1, true);
+                    GameSystem.TileObject(modX, modY - 1, true);
                 }
                 else if (restY >= 40)
                 {
 
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY, true);
+                    GameSystem.TileObject(modX, modY, true);
                 }
             }
         }

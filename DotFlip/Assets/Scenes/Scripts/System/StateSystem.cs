@@ -36,12 +36,3 @@ public enum Block
     INFINITY
 }
 
-public enum CameraView
-{
-    CENTER,
-    UPSIDE,
-    DOWNSIDE,
-    RIGHTSIDE,
-    LEFTSIDE
-}
-

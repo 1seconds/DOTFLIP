@@ -10,7 +10,6 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private Camera mainCamera;
     private GameObject blockPrefab;
     static public GameObject targetBlock;
-    private bool isPaintOn = false;
     private GameSystem gameSystem;
     private CameraSystem cameraSystem;
 
@@ -40,10 +39,10 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     private void SetTilePos(GameObject obj)
     {
-        restX = Input.mousePosition.x % 80;
-        restY = Input.mousePosition.y % 80;
-        modX = (int)(Input.mousePosition.x / 80);
-        modY = (int)(Input.mousePosition.y / 80);
+        restX = Input.mousePosition.x % 32;
+        restY = Input.mousePosition.y % 32;
+        modX = (int)(Input.mousePosition.x / 32);
+        modY = (int)(Input.mousePosition.y / 32);
 
         if (modX < 2)
         {
@@ -66,24 +65,24 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             modY = 6;
         }
 
-        if (restX < 40)
+        if (restX < 32)
         {
-            if (restY < 40)
+            if (restY < 32)
             {
                 obj.transform.position = mainCamera.ScreenToWorldPoint(new Vector3(80 * modX, 80 * modY, 0));
             }
-            else if (restY >= 40)
+            else if (restY >= 32)
             {
                 obj.transform.position = mainCamera.ScreenToWorldPoint(new Vector3(80 * modX, 80 * (modY + 1), 0));
             }
         }
-        else if (restX >= 40)
+        else if (restX >= 32)
         {
-            if (restY < 40)
+            if (restY < 32)
             {
                 obj.transform.position = mainCamera.ScreenToWorldPoint(new Vector3(80 * (modX + 1), 80 * modY, 0));
             }
-            else if (restY >= 40)
+            else if (restY >= 32)
             {
                 obj.transform.position = mainCamera.ScreenToWorldPoint(new Vector3(80 * (modX + 1), 80 * (modY + 1), 0));
             }
@@ -98,38 +97,38 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (restX < 40)
+        if (restX < 32)
         {
-            if (restY < 40)
+            if (restY < 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX -2, modY-2])
+                if (!GameSystem.tileObjectState[modX -2, modY-2])
                     blockPrefab.GetComponent<BlockDestroy>().enabled = true;  
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY - 1, false);   
+                    GameSystem.TileObject(modX - 1, modY - 1, false);   
             }
-            else if (restY >= 40)
+            else if (restY >= 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 2, modY - 1])
+                if (!GameSystem.tileObjectState[modX - 2, modY - 1])
                     blockPrefab.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY, false);
+                    GameSystem.TileObject(modX - 1, modY, false);
             }
         }
-        else if (restX >= 40)
+        else if (restX >= 32)
         {
-            if (restY < 40)
+            if (restY < 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 1, modY-2])
+                if (!GameSystem.tileObjectState[modX - 1, modY-2])
                     blockPrefab.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY - 1, false);
+                    GameSystem.TileObject(modX, modY - 1, false);
             }
-            else if (restY >= 40)
+            else if (restY >= 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 1, modY-1])
+                if (!GameSystem.tileObjectState[modX - 1, modY-1])
                     blockPrefab.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY, false);
+                    GameSystem.TileObject(modX, modY, false);
             }
         }
         blockPrefab.transform.position += new Vector3(0, 0, 3.7f);
@@ -141,38 +140,37 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             return;
         if (ItemSystem.paintPrefab == null)
         {
-            restX = Input.mousePosition.x % 80;
-            restY = Input.mousePosition.y % 80;
-            modX = (int)(Input.mousePosition.x / 80);
-            modY = (int)(Input.mousePosition.y / 80);
+            restX = Input.mousePosition.x % 32;
+            restY = Input.mousePosition.y % 32;
+            modX = (int)(Input.mousePosition.x / 32);
+            modY = (int)(Input.mousePosition.y / 32);
 
-            if (restX < 40)
+            if (restX < 32)
             {
-                if (restY < 40)
+                if (restY < 32)
                 {
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY - 1, true);
+                    GameSystem.TileObject(modX - 1, modY - 1, true);
                 }
-                else if (restY >= 40)
+                else if (restY >= 32)
                 {
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY, true);
+                    GameSystem.TileObject(modX - 1, modY, true);
                 }
             }
-            else if (restX >= 40)
+            else if (restX >= 32)
             {
-                if (restY < 40)
+                if (restY < 32)
                 {
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY - 1, true);
+                    GameSystem.TileObject(modX, modY - 1, true);
                 }
-                else if (restY >= 40)
+                else if (restY >= 32)
                 {
 
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY, true);
+                    GameSystem.TileObject(modX, modY, true);
                 }
             }
             return;
         }
 
-        isPaintOn = true;
         //if (ItemSystem.paintPrefab.name.Contains("Slow"))
         //{
         //    gameObject.GetComponent<SpriteRenderer>().color = new Color(0,255,255, 0.5f);
@@ -192,44 +190,38 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnMouseUp()
     {
-        if (isPaintOn)
+        if (restX < 32)
         {
-            isPaintOn = false;
-            return;
-        }
-
-        if (restX < 40)
-        {
-            if (restY < 40)
+            if (restY < 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 2, modY-2])
+                if (!GameSystem.tileObjectState[modX - 2, modY-2])
                     gameObject.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY - 1, false);
+                    GameSystem.TileObject(modX - 1, modY - 1, false);
             }
-            else if (restY >= 40)
+            else if (restY >= 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 2, modY -1])
+                if (!GameSystem.tileObjectState[modX - 2, modY -1])
                     gameObject.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX - 1, modY, false);
+                    GameSystem.TileObject(modX - 1, modY, false);
             }
         }
-        else if (restX >= 40)
+        else if (restX >= 32)
         {
-            if (restY < 40)
+            if (restY < 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 1, modY-2])
+                if (!GameSystem.tileObjectState[modX - 1, modY-2])
                     gameObject.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY - 1, false);
+                    GameSystem.TileObject(modX, modY - 1, false);
             }
-            else if (restY >= 40)
+            else if (restY >= 32)
             {
-                if (!GameSystem.tileObjectState[(int)cameraSystem.currentCameraView, modX - 1, modY-1])
+                if (!GameSystem.tileObjectState[modX - 1, modY-1])
                     gameObject.GetComponent<BlockDestroy>().enabled = true;
                 else
-                    GameSystem.TileObject(cameraSystem.currentCameraView, modX, modY, false);
+                    GameSystem.TileObject(modX, modY, false);
             }
         }
         gameObject.transform.position += new Vector3(0, 0, 3.7f);
@@ -237,9 +229,6 @@ public class UIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnMouseDrag()
     {
-        if (isPaintOn)
-            return;
-
         SetTilePos(gameObject);
     }
 }

@@ -24,37 +24,34 @@ public class GameSystem : MonoBehaviour
     public static int rowCnt = 6;
     public static int colCnt = 13;
 
-    static public bool[,,] tileObjectState = new bool[5, colCnt, rowCnt];
+    static public bool[,] tileObjectState = new bool[colCnt, rowCnt];
 
-    static public void TileObject(CameraView view, int row, int col, bool isAble)
+    static public void TileObject(int row, int col, bool isAble)
     {
         if (row - 1 < 0 || col - 1 < 0)
             return;
         else
-            tileObjectState[(int)view, row - 1, col - 1] = isAble;
+            tileObjectState[row - 1, col - 1] = isAble;
     }
 
 
 
     private void Awake()
     {
-        for(int k =0; k < 5;k++)
+        for (int i = 0; i < colCnt; i++)
         {
-            for (int i = 0; i < colCnt; i++)
+            for (int j = 0; j < rowCnt; j++)
             {
-                for (int j = 0; j < rowCnt; j++)
-                {
-                    tileObjectState[k, i, j] = true;
-                }
+                tileObjectState[i, j] = true;
             }
         }
-        
     }
     private void SaveSwitchContainObjectPos()
     {
         switchContainObject = new GameObject[switchContainObjectsStack.Count];
         switchContainObjectPos = new Vector3[switchContainObjectsStack.Count];
         switchContainObjectEulerAngle = new Vector3[switchContainObjectsStack.Count];
+
         //초기 위치 저장
         for (int i =0; i< switchContainObject.Length; i++)
         {
@@ -111,7 +108,6 @@ public class GameSystem : MonoBehaviour
         currentGameState = GameState.READY;
         uiSystem.DownSideCanvasOn();
         gameObject.GetComponent<CameraSystem>().camera_.transform.position = new Vector3(0, 0, -10);
-        gameObject.GetComponent<CameraSystem>().currentCameraView = CameraView.CENTER;
 
         uiSystem.MessageManager(stageSystem.stage[stageSystem.currentStage - 1].messageInfo.preMent, 0);
         for (int i = 0; i < obstacleBlocks.Length; i++)
