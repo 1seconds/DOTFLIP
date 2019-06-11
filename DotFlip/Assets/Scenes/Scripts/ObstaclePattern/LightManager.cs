@@ -29,7 +29,14 @@ public class LightManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         startPos = gameObject.transform.position;
 
+        VectorPivotsReadjust();
         lightCor = StartCoroutine(Moving(0));
+    }
+
+    void VectorPivotsReadjust()
+    {
+        //for (int i = 0; i < desPos.Length; i++)
+        //    desPos[i] -= new Vector3(700,300,0);
     }
 
     IEnumerator Moving(int index)
@@ -37,6 +44,7 @@ public class LightManager : MonoBehaviour
         while (true)
         {
             desNormalVec = desPos[index] - gameObject.transform.localPosition;
+            Debug.Log(desNormalVec);
             desNormalVec.Normalize();
             gameObject.transform.Translate(desNormalVec * speed);
             yield return new WaitForEndOfFrame();
